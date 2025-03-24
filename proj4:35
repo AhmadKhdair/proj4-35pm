@@ -384,8 +384,8 @@ struct node* S=NULL;
     void performATask(struct node* task, struct node* L,struct node* S){
     struct node* temp=(struct node*) malloc(sizeof(struct node));
     temp->taskID=task->taskID;
-    strcmp(temp->taskName,task->taskName);
-    strcmp(temp->taskDate,task->taskDate);
+    strcpy(temp->taskName,task->taskName);
+    strcpy(temp->taskDate,task->taskDate);
     temp->taskDuration=task->taskDuration;
         Push(temp,S);
         removeNodeTask(task,L);
@@ -615,14 +615,18 @@ struct node* copyStack(struct node* S) {
     return newStack;
 }*/
 
-void printStack(struct node* S){
-    if(S!=NULL&&S->Next!=NULL){
-    struct node* temp = S->Next;
-    printf("TOP=S [  |-]-> ");
-    while (temp != NULL) {
-        printf("[%d#%s#%s#%d |-]-> ", temp->taskID,temp->taskName,temp->taskDate,temp->taskDuration);
-        temp = temp->Next;
+void printStack(struct node* S) {
+    if (S == NULL)
+        printf("Invalid Head");
+    else if (S->Next == NULL)
+        printf("empty List");
+    else {
+        struct node *temp = S->Next;
+        printf("TOP=S [  |-]-> ");
+        while (temp != NULL) {
+            printf("[%d#%s#%s#%lf |-]-> ", temp->taskID, temp->taskName, temp->taskDate, temp->taskDuration);
+            temp = temp->Next;
+        }
+        printf("NULL\n");
     }
     }
-    printf("NULL\n");
-}
